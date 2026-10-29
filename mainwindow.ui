@@ -19,12 +19,12 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>361</width>
-      <height>321</height>
+      <width>276</width>
+      <height>580</height>
      </rect>
     </property>
     <property name="title">
-     <string>Conexión</string>
+     <string>Motor 1</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -143,24 +143,81 @@ border: 1px solid black;</string>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Baudrate</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="cmb_baudrate">
-         <item>
+      <widget class="QPushButton" name="btn_conectar">
+       <property name="text">
+        <string>Conectar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="title">
+        <string>Parámetros</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="lb_max_current">
           <property name="text">
-           <string>9600</string>
+           <string/>
           </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lb_max_peak_current">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Monitor</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="lb_voltage">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lb_current">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lb_rpm">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lb_position">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Modos</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPlainTextEdit" name="txt_log"/>
@@ -169,56 +226,6 @@ border: 1px solid black;</string>
       <widget class="QPushButton" name="btn_limpiar">
        <property name="text">
         <string>Limpiar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_conectar">
-       <property name="text">
-        <string>Conectar</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>60</y>
-      <width>241</width>
-      <height>211</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Dispositivo</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLabel" name="lb_voltage">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="lb_temperature">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="lb_firmware">
-       <property name="text">
-        <string/>
        </property>
       </widget>
      </item>

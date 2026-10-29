@@ -53,8 +53,7 @@ void MainWindow::on_btn_conectar_clicked() {
         m_driver->disconnectDevice();
     } else {
         QString port = ui->cmb_puertos->currentData().toString();
-        qint32 baud = ui->cmb_baudrate->currentText().toInt();
-        m_driver->connectDevice(port, baud);
+        m_driver->connectDevice(port);
     }
 }
 
@@ -67,16 +66,27 @@ void MainWindow::setupConnections() {
     connect(m_driver, &BcprDriver::connectionChanged, this, [this](bool connected) {
         actualizarUiEstado(connected, connected ? "ONLINE" : "DESCONECTADO", connected ? "#2e7d32" : "#555555");
     });
-    connect(m_driver, &BcprDriver::firmwareVersionSignal, this, [this](QString firmware) {
-        ui->lb_firmware->setText(firmware);
-    });
+
     connect(m_driver, &BcprDriver::busVoltageSignal, this, [this](double voltage) {
         ui->lb_voltage->setText(QString("Tensión Bus: %1 V").arg(voltage, 0, 'f', 1));
+    });    
+    connect(m_driver, &BcprDriver::rpmSignal, this, [this](double rpm) {
+        ui->lb_rpm->setText(QString("Velocidad: %1 RPM").arg(rpm, 0, 'f', 1));
     });
-    connect(m_driver, &BcprDriver::temperatureSignal, this, [this](double temperature) {
-        ui->lb_temperature->setText(QString("Temperatura: %1 ºC").arg(temperature, 0, 'f', 1));
+    connect(m_driver, &BcprDriver::currentSignal, this, [this](double amps) {
+        ui->lb_current->setText(QString("Corriente: %1 A").arg(amps, 0, 'f', 2));
+    });
+    connect(m_driver, &BcprDriver::positionSignal, this, [this](double degrees) {
+        ui->lb_position->setText(QString("Posición: %1 °").arg(degrees, 0, 'f', 1));
+    });
+    connect(m_driver, &BcprDriver::peakCurrentLimitSignal, this, [this](double peakAmps) {
+        ui->lb_max_peak_current->setText(QString("Corriente Máxima Pico: %1 A").arg(peakAmps, 0, 'f', 2));
     });
 
+    // Conectamos la señal del límite continuo al label fijo
+    connect(m_driver, &BcprDriver::contCurrentLimitSignal, this, [this](double contAmps) {
+        ui->lb_max_current->setText(QString("Corriente Máxima: %1 A").arg(contAmps, 0, 'f', 2));
+    });
 }
 
 QString MainWindow::transaccionSerial(const QString &cmd, int timeoutMs) {
@@ -115,7 +125,7 @@ void MainWindow::toggle_led(bool connected) {
 void MainWindow::actualizarUiEstado(bool conectado, const QString &texto, const QString &color) {
     ui->btn_conectar->setText(conectado ? "Desconectar" : "Conectar");
     ui->cmb_puertos->setEnabled(!conectado);
-    ui->cmb_baudrate->setEnabled(!conectado);
     ui->btnRefrescar->setEnabled(!conectado);
     toggle_led(conectado);
 }
+
